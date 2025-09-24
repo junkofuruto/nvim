@@ -37,7 +37,7 @@ lualine.setup({
         lualine_a = {"mode"},
         lualine_b = {"diff"},
         lualine_c = {"filename"},
-        lualine_x = {},
+        lualine_x = {"lsp_status"},
         lualine_y = {},
         lualine_z = {"branch"}
     },
