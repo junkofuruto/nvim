@@ -3,6 +3,7 @@ vim.cmd [[packadd packer.nvim]]
 return require("packer").startup(function(use)
     use { "Shatur/neovim-ayu", config = function() require("cmgdev.config.colortheme") end }
 
+    use { "mbbill/undotree" }
     use { "mason-org/mason.nvim" }
 	use { "nvim-lua/plenary.nvim" }
     use { "neovim/nvim-lspconfig" }
