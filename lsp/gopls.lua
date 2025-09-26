@@ -24,6 +24,10 @@ vim.lsp.config["gopls"] = {
                 rangeVariableTypes = false,
             },
             analyses = {
+                packagecomments = false,
+                ST1003 = false,
+                nolintlint = true,
+                fieldalignment = false,
                 nilness = true,
                 unusedparams = true,
                 unusedwrite = true,
