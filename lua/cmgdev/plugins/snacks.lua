@@ -32,7 +32,7 @@ return {
             sections = {
                 {
                     section = "terminal",
-                    cmd = "aic /home/prmt/.config/nvim/assets/header.jpg -C -c -d 75,50",
+                    cmd = "aic " .. os.getenv("HOME") .. "/.config/nvim/assets/header.jpg -C -c -d 75,50",
                     height = 50,
                     width = 75,
                     random = false,
