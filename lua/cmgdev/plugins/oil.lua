@@ -13,6 +13,9 @@ return {
                 "size",
                 "mtime"
             },
+            view_options = {
+                show_hidden = true
+            },
             win_options = {
                 wrap = true,
                 signcolumn = "yes:2"
