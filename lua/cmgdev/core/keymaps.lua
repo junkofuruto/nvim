@@ -10,8 +10,6 @@ vim.keymap.set("n", "<C-k>", ":wincmd k<CR>",
 vim.keymap.set("n", "<C-l>", ":wincmd l<CR>",
     { silent = true, noremap = true, desc = "[CMGDEV] Go to the down slpit window" })
 
-vim.keymap.set("n", "<C-b>", "<nop>", { silent = true, noremap = true, desc = "[CMGDEV] Tmux command" })
-
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true, noremap = true, desc = "[CMGDEV] Move selected down by 1" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true, noremap = true, desc = "[CMGDEV] Move selected up by 1" })
 
@@ -29,3 +27,5 @@ vim.keymap.set("n", "<leader>sv", "<C-w>v", { silent = true, noremap = true, des
 vim.keymap.set("n", "<leader>sh", "<C-w>h", { silent = true, noremap = true, desc = "[CMGDEV] Horisontal split" })
 vim.keymap.set("n", "<leader>se", "<C-w>=", { silent = true, noremap = true, desc = "[CMGDEV] Make splits equal" })
 vim.keymap.set("n", "<leader>sx", "<cmd>close<CR>", { silent = true, noremap = true, desc = "[CMGDEV] Close split" })
+
+vim.api.nvim_set_keymap('n', '<C-b>', ':!tmux send-keys -t your-session-name C-b<CR>', { noremap = true, silent = true })
