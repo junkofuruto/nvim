@@ -12,6 +12,7 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.wrap = true
+vim.opt.fixeol = true
 vim.opt.termguicolors = false
 
 vim.opt.swapfile = false
