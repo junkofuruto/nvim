@@ -3,7 +3,8 @@ return {
         "Shatur/neovim-ayu",
         name = "ayu",
         config = function()
-            require("ayu").setup({
+            local ayu = require("ayu")
+            ayu.setup({
                 overrides = {
                     Comment = { italic = false },
                 }
