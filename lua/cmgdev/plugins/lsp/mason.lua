@@ -30,8 +30,6 @@ return {
                 "html",
                 "tailwindcss",
                 "rust_analyzer",
-                "emmet_ls",
-                "emmet_language_server"
             }
         })
 
