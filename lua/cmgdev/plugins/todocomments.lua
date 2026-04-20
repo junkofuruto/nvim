@@ -9,9 +9,9 @@ return {
         todocomments.setup({
             keywords = {
                 FIX = {
-                    icon = " ", 
-                    color = "error", 
-                    alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },  
+                    icon = " ",
+                    color = "error",
+                    alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
                 },
                 TODO = { icon = " ", color = "info" },
                 HACK = { icon = " ", color = "warning" },
