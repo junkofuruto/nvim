@@ -14,6 +14,17 @@ return {
             local diagnostics = vim.diagnostic.get(bufnr, { lnum = original_line })
             if #diagnostics == 0 then return end
 
+            local seen = {}
+            local unique = {}
+            for _, d in ipairs(diagnostics) do
+                local key = (d.severity or 0) .. ":" .. (d.message or "")
+                if not seen[key] then
+                    seen[key] = true
+                    table.insert(unique, d)
+                end
+            end
+            diagnostics = unique
+
             table.sort(diagnostics, function(a, b)
                 return a.severity < b.severity
             end)
@@ -22,10 +33,10 @@ return {
             local ns = vim.api.nvim_create_namespace("diag_float_ns")
 
             local icons = {
-                [vim.diagnostic.severity.ERROR] = " E ",
-                [vim.diagnostic.severity.WARN]  = " W ",
-                [vim.diagnostic.severity.INFO]  = " I ",
-                [vim.diagnostic.severity.HINT]  = " H ",
+                [vim.diagnostic.severity.ERROR] = " E: ",
+                [vim.diagnostic.severity.WARN]  = " W: ",
+                [vim.diagnostic.severity.INFO]  = " I: ",
+                [vim.diagnostic.severity.HINT]  = " H: ",
             }
 
             local hl_groups = {
@@ -47,7 +58,7 @@ return {
                 for _, word in ipairs(wrapped) do
                     if #current_line + #word + 1 > max_width then
                         table.insert(lines, current_line)
-                        current_line = "   " .. word .. " "
+                        current_line = "    " .. word .. " "
                     else
                         current_line = current_line .. word .. " "
                     end
@@ -95,12 +106,21 @@ return {
                 callback = function()
                     local current_line = vim.api.nvim_win_get_cursor(0)[1] - 1
                     if current_line ~= original_line then
-                        if vim.api.nvim_win_is_valid(win) then vim.api.nvim_win_close(win, true) end
-                        if vim.api.nvim_buf_is_valid(buf) then vim.api.nvim_buf_delete(buf, { force = true }) end
+                        if vim.api.nvim_win_is_valid(win) then
+                            vim.api.nvim_win_close(win, true)
+                        end
+                        if vim.api.nvim_buf_is_valid(buf) then
+                            vim.api.nvim_buf_delete(buf, { force = true })
+                        end
                         return
                     end
+
                     if vim.api.nvim_win_is_valid(win) then
-                        vim.api.nvim_win_set_config(win, { relative = "cursor", row = 1, col = 0 })
+                        vim.api.nvim_win_set_config(win, {
+                            relative = "cursor",
+                            row = 1,
+                            col = 0,
+                        })
                     end
                 end,
             })
