@@ -1,18 +1,14 @@
-return {
-    "windwp/nvim-autopairs",
-    event = { "InsertEnter" },
-    dependencies = {
-        "hrsh7th/nvim-cmp"
-    },
-    config = function()
-        local cmp = require("cmp")
-        local autopairs = require("nvim-autopairs")
-        local autopairs_cmp = require("nvim-autopairs.completion.cmp")
+vim.pack.add({
+    "https://github.com/windwp/nvim-autopairs",
+    "https://github.com/hrsh7th/nvim-cmp",
+}, { confirm = false })
 
-        autopairs.setup({
-            check_ts = true
-        })
+local cmp = require("cmp")
+local autopairs = require("nvim-autopairs")
+local autopairs_cmp = require("nvim-autopairs.completion.cmp")
 
-        cmp.event:on("confirm_done", autopairs_cmp.on_confirm_done())
-    end
-}
+autopairs.setup({
+    check_ts = true,
+})
+
+cmp.event:on("confirm_done", autopairs_cmp.on_confirm_done())

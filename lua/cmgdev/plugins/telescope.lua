@@ -1,9 +1,8 @@
-return {
-    "nvim-telescope/telescope.nvim",
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-        local telescope = require("telescope.builtin")
+vim.pack.add({
+    "https://github.com/nvim-telescope/telescope.nvim",
+    "https://github.com/nvim-lua/plenary.nvim",
+}, { confirm = false })
 
-        vim.keymap.set("n", "<leader>fd", telescope.lsp_document_symbols, { desc = "[CMGDEV] Show File Definitions" })
-    end
-}
+local telescope = require("telescope.builtin")
+
+vim.keymap.set("n", "<leader>fd", telescope.lsp_document_symbols, { desc = "[CMGDEV] Show File Definitions" })
