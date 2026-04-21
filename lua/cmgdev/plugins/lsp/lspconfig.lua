@@ -179,6 +179,28 @@ return {
 
                 opts.desc = "[CMGDEV] Show Buffer Diagnostics"
                 vim.keymap.set("n", "<leader>fe", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+
+                opts.desc = "[CMGDEV] Format Buffer"
+                vim.keymap.set("n", "<leader>ff", function()
+                    vim.lsp.buf.format({ async = true })
+                end, opts)
+
+                local client = vim.lsp.get_client_by_id(ev.data.client_id)
+                if not client then return end
+
+                if client.supports_method("textDocument/formatting") then
+                    vim.api.nvim_create_autocmd("BufWritePre", {
+                        buffer = ev.buf,
+                        callback = function()
+                            vim.lsp.buf.format({
+                                bufnr = ev.buf,
+                                id = client.id,
+                                async = false,
+                                timeout_ms = 2000,
+                            })
+                        end,
+                    })
+                end
             end
         })
     end
